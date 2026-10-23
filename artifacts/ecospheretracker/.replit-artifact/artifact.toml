@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "EcoSphere"
+description = "A cloud carbon footprint tracking dashboard for teams to understand emissions, renewable energy usage, and workload impact across AWS, Google Cloud, and Azure."
+version = "1.0.0"
+id = "artifacts/ecospheretracker"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18576
+
+[services.development]
+run = "pnpm --filter @workspace/ecospheretracker run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/ecospheretracker", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/ecospheretracker/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18576"
+BASE_PATH = "/"

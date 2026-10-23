@@ -1,0 +1,25 @@
+Create a sustainable Cloud Carbon Footprint Tracking web application called "EcoSphere" using React.js for the frontend and Node.js for the backend. 
+
+The application must focus heavily on a beautiful, creative, and lively user interface using a "Light & Bright" sustainable visual vibe. The design should feel premium, responsive, clean, and highly interactive.
+
+Frontend Styling Requirements:
+- Theme: Bright, cheerful, and light-themed (strictly avoid dark UI themes).
+- Color Palette: Mint green, vibrant emerald, sky blue, soft lemon yellow, and warm off-white backgrounds with smooth drop shadows.
+- Visual Anchors: Use glassmorphism cards, glowing UI borders, energetic SVG illustrations, and functional nature emojis to make the UI look amazing and wonderful.
+
+Core Features to Build:
+1. Interactive Dashboard: 
+   - A central hub displaying live "Green Meters" (circular or semi-circular animated gauge charts) that track saved carbon emissions, renewable energy usage percentages, and offset equivalents (e.g., "Trees Planted").
+   - Include a global visual map tracking cloud server data center locations across major clouds (AWS, Google Cloud, Azure) and highlighting their clean energy statuses using colorful pins.
+
+2. Analytics & Visualizing Charts:
+   - Dynamic Recharts or Chart.js integrations displaying energy usage trends.
+   - Interactive line graphs mapping "Carbon Footprint Over Time" and comparative bar charts contrasting different cloud regions.
+
+3. Complete History Log:
+   - A scannable, filterable transactional table showcasing the historical logs of cloud workloads, their specific runtimes, exact data locations, and the corresponding carbon score.
+   - Add a export functionality placeholder for downloading logs.
+
+Backend Setup (Node.js/Express):
+- Construct mock API endpoints that serve structured JSON data representing real-time carbon data, cloud region locations with carbon-intensity ratings, and historical time-series logs so the React charts animate immediately on page load.
+-

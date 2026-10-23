@@ -10,6 +10,8 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: eco
+    description: Cloud carbon tracking data
 paths:
   /healthz:
     get:
@@ -24,6 +26,85 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /eco/dashboard:
+    get:
+      operationId: getEcoDashboard
+      tags: [eco]
+      summary: Get current cloud sustainability metrics
+      responses:
+        "200":
+          description: Dashboard metrics
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EcoDashboard"
+  /eco/regions:
+    get:
+      operationId: getEcoRegions
+      tags: [eco]
+      summary: List cloud regions and their carbon intensity
+      responses:
+        "200":
+          description: Cloud regions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CloudRegion"
+  /eco/trends:
+    get:
+      operationId: getEcoTrends
+      tags: [eco]
+      summary: Get carbon and energy trend data
+      parameters:
+        - name: range
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [7d, 30d, 90d]
+            default: 7d
+      responses:
+        "200":
+          description: Time-series trends
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TrendPoint"
+  /eco/workloads:
+    get:
+      operationId: getEcoWorkloads
+      tags: [eco]
+      summary: List workload history with optional filters
+      parameters:
+        - name: provider
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [AWS, Google Cloud, Azure]
+        - name: region
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: search
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Filtered workload history
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CloudWorkload"
 components:
   schemas:
     HealthStatus:
@@ -32,5 +113,110 @@ components:
         status:
           type: string
       required:
+        - status
+    EcoDashboard:
+      type: object
+      properties:
+        footprintKg:
+          type: number
+        emissionsSavedKg:
+          type: number
+        renewablePercent:
+          type: number
+        treesEquivalent:
+          type: integer
+        previousPeriodDelta:
+          type: number
+        totalWorkloads:
+          type: integer
+        updatedAt:
+          type: string
+      required:
+        - footprintKg
+        - emissionsSavedKg
+        - renewablePercent
+        - treesEquivalent
+        - previousPeriodDelta
+        - totalWorkloads
+        - updatedAt
+    CloudRegion:
+      type: object
+      properties:
+        id:
+          type: string
+        provider:
+          type: string
+        name:
+          type: string
+        country:
+          type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
+        carbonIntensity:
+          type: number
+        renewablePercent:
+          type: number
+        status:
+          type: string
+          enum: [clean, improving, high]
+      required:
+        - id
+        - provider
+        - name
+        - country
+        - latitude
+        - longitude
+        - carbonIntensity
+        - renewablePercent
+        - status
+    TrendPoint:
+      type: object
+      properties:
+        date:
+          type: string
+        label:
+          type: string
+        emissionsKg:
+          type: number
+        energyKwh:
+          type: number
+      required:
+        - date
+        - label
+        - emissionsKg
+        - energyKwh
+    CloudWorkload:
+      type: object
+      properties:
+        id:
+          type: string
+        workloadName:
+          type: string
+        provider:
+          type: string
+        region:
+          type: string
+        startedAt:
+          type: string
+        runtimeMinutes:
+          type: integer
+        energyKwh:
+          type: number
+        carbonKg:
+          type: number
+        status:
+          type: string
+          enum: [efficient, moderate, high]
+      required:
+        - id
+        - workloadName
+        - provider
+        - region
+        - startedAt
+        - runtimeMinutes
+        - energyKwh
+        - carbonKg
         - status
 

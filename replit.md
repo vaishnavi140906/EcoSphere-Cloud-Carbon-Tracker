@@ -1,6 +1,6 @@
-# [Project name]
+# EcoSphere
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+Cloud carbon footprint tracking across AWS, Google Cloud, and Azure, with emissions metrics, regional comparisons, trend analytics, and workload history.
 
 ## Run & Operate
 
@@ -30,7 +30,7 @@ _Populate as you build — non-obvious choices a reader couldn't infer from the 
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+EcoSphere shows cloud emissions, avoided carbon, renewable energy share, and nature equivalents. Teams can compare the carbon intensity of cloud regions, explore emissions and energy trends, filter workload history, and download the visible results as CSV. Current API responses are representative mock data.
 
 ## User preferences
 
